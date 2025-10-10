@@ -1,0 +1,57 @@
+{
+    "manifestVersion": 1,
+    "id": "compliancex",
+    "publisher": "wwarobert",
+    "version": "1.0.0",
+    "name": "ComplianceX",
+    "description": "A comprehensive compliance extension for Azure DevOps that helps organizations maintain and enforce compliance standards across their projects.",
+    "categories": [
+        "Azure Boards",
+        "Azure Repos",
+        "Azure Pipelines"
+    ],
+    "targets": [
+        {
+            "id": "Microsoft.VisualStudio.Services"
+        }
+    ],
+    "icons": {
+        "default": "images/extension-icon.png"
+    },
+    "content": {
+        "details": {
+            "path": "README.md"
+        }
+    },
+    "files": [
+        {
+            "path": "dist",
+            "addressable": true
+        },
+        {
+            "path": "images",
+            "addressable": true
+        }
+    ],
+    "contributions": [
+        {
+            "id": "compliance-hub",
+            "type": "ms.vss-web.hub",
+            "description": "Compliance management hub",
+            "targets": [
+                "ms.vss-web.project-admin-hub-group"
+            ],
+            "properties": {
+                "name": "Compliance",
+                "order": 100,
+                "uri": "dist/compliance-hub.html"
+            }
+        }
+    ],
+    "scopes": [
+        "vso.work",
+        "vso.code",
+        "vso.build",
+        "vso.project"
+    ]
+}

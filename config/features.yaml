@@ -1,0 +1,49 @@
+# Feature Flag Configuration
+
+features:
+  branch-protection:
+    enabled: true
+    description: "Enforces branch protection rules on repositories"
+    parameters:
+      required_reviewers: 1
+      require_code_owner_reviews: true
+      enforce_admins: true
+  
+  auto-fix:
+    enabled: true
+    description: "Automatically fixes compliance issues when possible"
+    parameters:
+      require_approval: true
+      max_auto_fixes_per_day: 10
+  
+  notifications:
+    enabled: true
+    description: "Sends notifications for compliance issues"
+    parameters:
+      email_notifications: true
+      teams_notifications: false
+      notification_frequency: "immediate"
+  
+  compliance-scheduling:
+    enabled: true
+    description: "Scheduled compliance checks"
+    parameters:
+      frequency: "daily"
+      time: "00:00"
+      timezone: "UTC"
+  
+  reporting:
+    enabled: true
+    description: "Generates compliance reports"
+    parameters:
+      retention_days: 90
+      formats: ["html", "pdf", "json"]
+      storage_type: "azure_blob"
+  
+  dashboard:
+    enabled: true
+    description: "Real-time compliance dashboard"
+    parameters:
+      refresh_interval: 300
+      show_trends: true
+      max_history_days: 30

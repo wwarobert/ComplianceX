@@ -1,0 +1,78 @@
+# ComplianceX Configuration Example
+
+# Azure DevOps Configuration
+azure_devops:
+  organization: "your-organization"
+  project: "*"  # '*' for all projects
+  pat_token: ""  # Personal Access Token
+
+# Compliance Rules
+rules:
+  repository:
+    - rule: "require_branch_protection"
+      level: "error"
+      description: "Main branch must be protected"
+      
+    - rule: "require_code_review"
+      level: "error"
+      description: "Pull requests must have at least one reviewer"
+      
+    - rule: "require_build_validation"
+      level: "warning"
+      description: "Build validation should be enabled for pull requests"
+
+  pipeline:
+    - rule: "secure_variables"
+      level: "error"
+      description: "Pipeline variables containing secrets must be marked as secure"
+      
+    - rule: "approved_pools"
+      level: "error"
+      description: "Pipelines must use approved agent pools"
+
+  security:
+    - rule: "minimum_permissions"
+      level: "error"
+      description: "Project permissions must follow least privilege principle"
+      
+    - rule: "require_2fa"
+      level: "error"
+      description: "All users must have 2FA enabled"
+
+# Notification Settings
+notifications:
+  email:
+    enabled: true
+    recipients: []
+  
+  webhook:
+    enabled: false
+    url: ""
+
+# Scanning Schedule
+schedule:
+  frequency: "daily"  # daily, weekly, monthly
+  time: "00:00"  # UTC
+  days: ["Monday"]  # for weekly scans
+
+# Reporting
+reports:
+  retention_days: 90
+  format: ["html", "pdf", "json"]
+  storage:
+    type: "azure_blob"  # local, azure_blob
+    connection_string: ""
+    container: "compliance-reports"
+
+# Automation
+automation:
+  auto_fix: false  # Enable/disable automatic fixes
+  approval_required: true  # Require approval for fixes
+  excluded_rules: []  # Rules to exclude from auto-fix
+
+# Logging
+logging:
+  level: "INFO"  # DEBUG, INFO, WARNING, ERROR
+  file: "logs/compliance.log"
+  max_size: 10485760  # 10MB
+  backup_count: 5
