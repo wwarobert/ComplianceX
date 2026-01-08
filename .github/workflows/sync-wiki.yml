@@ -14,9 +14,11 @@ on:
   push:
     branches:
       - main
+      - feature/004-fix-wiki-sync-bash-error  # TEMP: Remove before merging
     paths:
       - 'docs/**'
       - '.github/copilot-instructions.md'
+      - '.github/workflows/sync-wiki.yml'  # Also trigger on workflow changes
   workflow_dispatch:
 
 jobs:
@@ -52,11 +54,14 @@ jobs:
           # Copy all documentation files (maintains structure)
           cp -r docs/* wiki/
           
+          # Store repository URL in variable to avoid bash interpolation issues
+          REPO_URL="https://github.com/${{ github.repository }}"
+          
           # Create wiki Home page with clean navigation
-          cat > wiki/Home.md << 'EOF'
+          cat > wiki/Home.md << EOF
           # ComplianceX Documentation
 
-          Welcome to ComplianceX! This wiki is automatically synced from the [docs/](https://github.com/${{ github.repository }}/tree/main/docs) folder.
+          Welcome to ComplianceX! This wiki is automatically synced from the docs/ folder.
 
           ## 🚀 Quick Start
 
@@ -92,7 +97,14 @@ jobs:
 
           ## 🔗 Links
 
-          - [GitHub Repository](https://github.com/${{ github.repository }})
+          - [GitHub Repository]($REPO_URL)
+          - [Issue Tracker]($REPO_URL/issues)
+          - [Discussions]($REPO_URL/discussions)
+
+          ---
+
+          _This wiki is automatically updated when docs/ changes in the main branch._
+          EOF
           - [Issue Tracker](https://github.com/${{ github.repository }}/issues)
           - [Discussions](https://github.com/${{ github.repository }}/discussions)
 
