@@ -1,0 +1,76 @@
+# Sync documentation to GitHub Wiki
+# This workflow automatically syncs docs/ folder to the GitHub Wiki
+
+name: Sync Wiki
+
+on:
+  push:
+    branches:
+      - main
+    paths:
+      - 'docs/**'
+      - '.github/copilot-instructions.md'
+  workflow_dispatch:
+
+jobs:
+  sync-wiki:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Checkout wiki
+        uses: actions/checkout@v4
+        with:
+          repository: ${{ github.repository }}.wiki
+          path: wiki
+          token: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Sync documentation to wiki
+        run: |
+          # Create wiki structure
+          mkdir -p wiki
+          
+          # Copy documentation files
+          cp -r docs/* wiki/
+          cp .github/copilot-instructions.md wiki/GitHub-Copilot-Instructions.md
+          
+          # Create wiki Home page
+          cat > wiki/Home.md << 'EOF'
+          # ComplianceX Documentation
+
+          Welcome to the ComplianceX documentation wiki!
+
+          ## Getting Started
+          - [Setup Instructions](setup/README.md)
+          - [Development Guide](development/README.md)
+
+          ## Development Guidelines
+          - [Branching Strategy](development/branching-strategy.md)
+          - [Feature Roadmap](development/feature-roadmap.md)
+          - [Naming Conventions](development/naming_conventions.md)
+          - [GitHub Copilot Instructions](GitHub-Copilot-Instructions.md)
+
+          ## Plugin Development
+          - [Plugin Development Guide](plugins/development-guide.md)
+          - [Branch Protection Example](plugins/examples/branch-protection.md)
+
+          ## API Documentation
+          - [API Overview](api/README.md)
+
+          ## Infrastructure
+          - [Infrastructure Setup](setup/infrastructure.md)
+          - [Marketplace Deployment](setup/marketplace-deployment.md)
+
+          ---
+
+          **Note**: This wiki is automatically synced from the [docs/](https://github.com/${{ github.repository }}/tree/main/docs) folder in the repository.
+          EOF
+
+      - name: Commit and push to wiki
+        working-directory: wiki
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git add .
+          git diff --quiet && git diff --staged --quiet || (git commit -m "Sync documentation from main repository" && git push)
