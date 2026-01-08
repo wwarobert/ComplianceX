@@ -46,38 +46,60 @@ jobs:
 
       - name: Sync documentation to wiki
         run: |
-          # Create wiki structure
-          mkdir -p wiki
+          # Clear wiki directory
+          rm -rf wiki/*
           
-          # Copy documentation files
+          # Copy all documentation files (maintains structure)
           cp -r docs/* wiki/
-          cp .github/copilot-instructions.md wiki/GitHub-Copilot-Instructions.md
           
-          # Create wiki Home page
+          # Create wiki Home page with clean navigation
           cat > wiki/Home.md << 'EOF'
           # ComplianceX Documentation
 
-          Welcome to the ComplianceX documentation wiki!
+          Welcome to ComplianceX! This wiki is automatically synced from the [docs/](https://github.com/${{ github.repository }}/tree/main/docs) folder.
 
-          ## Getting Started
-          - [Setup Instructions](setup/README.md)
-          - [Development Guide](development/README.md)
+          ## 🚀 Quick Start
 
-          ## Development Guidelines
-          - [Branching Strategy](development/branching-strategy.md)
-          - [Feature Roadmap](development/feature-roadmap.md)
-          - [Naming Conventions](development/naming_conventions.md)
-          - [GitHub Copilot Instructions](GitHub-Copilot-Instructions.md)
+          - **[Getting Started](Getting-Started.md)** - New to ComplianceX? Start here
+          - **[Installation](setup/Installation.md)** - Install and configure
+          - **[Your First Rule](plugins/Your-First-Rule.md)** - Create your first compliance rule
 
-          ## Plugin Development
-          - [Plugin Development Guide](plugins/development-guide.md)
-          - [Branch Protection Example](plugins/examples/branch-protection.md)
+          ## 📖 Documentation
 
-          ## API Documentation
-          - [API Overview](api/README.md)
+          ### For Users
+          - [Getting Started](Getting-Started.md)
+          - [Installation Guide](setup/Installation.md)
+          - [Configuration](setup/Configuration.md)
+          - [Deployment](setup/Deployment.md)
 
-          ## Infrastructure
-          - [Infrastructure Setup](setup/infrastructure.md)
+          ### For Developers
+          - [Development Setup](development/Development-Setup.md)
+          - [Architecture Overview](development/Architecture.md)
+          - [API Reference](api/API-Reference.md)
+          - [Contributing Guide](development/Contributing.md)
+
+          ### For Plugin Authors
+          - [Plugin Development](plugins/Plugin-Development.md)
+          - [Your First Rule](plugins/Your-First-Rule.md)
+          - [Plugin Examples](plugins/Examples.md)
+          - [Plugin API Reference](plugins/API-Reference.md)
+
+          ### Guidelines & Standards
+          - [Branching Strategy](development/Branching-Strategy.md)
+          - [Naming Conventions](development/Naming-Conventions.md)
+          - [GitHub Copilot Guide](development/GitHub-Copilot-Guide.md)
+          - [Feature Roadmap](development/Feature-Roadmap.md)
+
+          ## 🔗 Links
+
+          - [GitHub Repository](https://github.com/${{ github.repository }})
+          - [Issue Tracker](https://github.com/${{ github.repository }}/issues)
+          - [Discussions](https://github.com/${{ github.repository }}/discussions)
+
+          ---
+
+          _This wiki is automatically updated when docs/ changes in the main branch._
+          EOF
           - [Marketplace Deployment](setup/marketplace-deployment.md)
 
           ---

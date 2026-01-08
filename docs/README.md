@@ -1,53 +1,69 @@
 # ComplianceX Documentation
 
-Welcome to the ComplianceX documentation! This directory contains comprehensive guides for developers, contributors, and users.
+Welcome to ComplianceX! This documentation helps you understand, deploy, and contribute to the project.
 
-## 📚 Documentation Index
+> **📌 Navigation Tip**: This documentation is available both in the repository and on the [GitHub Wiki](../../wiki) (auto-synced).
 
-### Getting Started
-- **[Setup Instructions](setup/README.md)** - Get ComplianceX running locally
-- **[Development Setup](setup/development.md)** - Configure your development environment
-- **[Infrastructure Setup](setup/infrastructure.md)** - Deploy ComplianceX infrastructure
+---
 
-### Development Guidelines
-- **[Branching Strategy](development/branching-strategy.md)** - Git workflow and branching model
-- **[Feature Roadmap](development/feature-roadmap.md)** - Current and planned features
-- **[Naming Conventions](development/naming_conventions.md)** - Code and file naming standards
-- **[GitHub Copilot Instructions](../.github/copilot-instructions.md)** - AI-assisted development guide
+## 🚀 Quick Start
 
-### Plugin Development
-- **[Plugin Development Guide](plugins/development-guide.md)** - Create custom compliance rules
-- **[Branch Protection Example](plugins/examples/branch-protection.md)** - Sample plugin implementation
+New to ComplianceX? Start here:
 
-### API Documentation
-- **[API Overview](api/README.md)** - REST API endpoints and usage
+1. **[Getting Started](Getting-Started.md)** - What is ComplianceX and how it works
+2. **[Installation](setup/Installation.md)** - Install and configure ComplianceX
+3. **[Your First Rule](plugins/Your-First-Rule.md)** - Create your first compliance rule
 
-### Deployment
-- **[Marketplace Deployment](setup/marketplace-deployment.md)** - Publish to Azure DevOps Marketplace
+---
 
-## 🔗 Quick Links
+## 📖 Documentation Sections
 
-- [Main README](../README.md) - Project overview
-- [Contributing Guide](../CONTRIBUTING.md) - How to contribute (when added)
-- [License](../LICENSE) - Project license
+### For Users
+- **[Getting Started](Getting-Started.md)** - Introduction and core concepts
+- **[Installation Guide](setup/Installation.md)** - Setup instructions
+- **[Configuration](setup/Configuration.md)** - Configure compliance rules and settings
+- **[Deployment](setup/Deployment.md)** - Deploy to Azure DevOps organization
 
-## 📖 Documentation Formats
+### For Developers
+- **[Development Setup](development/Development-Setup.md)** - Set up local development environment
+- **[Architecture Overview](development/Architecture.md)** - System architecture and design
+- **[API Reference](api/API-Reference.md)** - REST API documentation
+- **[Contributing Guide](development/Contributing.md)** - How to contribute code
 
-This documentation is available in multiple formats:
+### For Plugin Authors
+- **[Plugin Development](plugins/Plugin-Development.md)** - Create custom compliance rules
+- **[Your First Rule](plugins/Your-First-Rule.md)** - Step-by-step plugin tutorial
+- **[Plugin Examples](plugins/Examples.md)** - Sample plugin implementations
+- **[Plugin API Reference](plugins/API-Reference.md)** - Plugin system API
 
-1. **In Repository** - Browse directly on GitHub: [docs/](https://github.com/wwarobert/ComplianceX/tree/main/docs)
-2. **GitHub Wiki** - Automatically synced wiki pages
-3. **GitHub Pages** - Static documentation site (if enabled)
+### Guidelines & Standards
+- **[Branching Strategy](development/Branching-Strategy.md)** - Git workflow and branching
+- **[Naming Conventions](development/Naming-Conventions.md)** - Code style and naming
+- **[GitHub Copilot Guide](development/GitHub-Copilot-Guide.md)** - AI-assisted development
+- **[Feature Roadmap](development/Feature-Roadmap.md)** - Current and planned features
 
-## 🤝 Contributing to Documentation
+---
 
-Documentation improvements are always welcome! Please:
+## 🔗 External Resources
 
-1. Keep documentation up-to-date with code changes
-2. Follow the existing structure and formatting
-3. Use clear, concise language
-4. Include code examples where appropriate
-5. Test all links and references
+- **[GitHub Repository](https://github.com/wwarobert/ComplianceX)** - Source code
+- **[Azure DevOps Marketplace](https://marketplace.visualstudio.com/)** - Published extension (coming soon)
+- **[Issue Tracker](https://github.com/wwarobert/ComplianceX/issues)** - Report bugs or request features
+
+---
+
+## 💡 Need Help?
+
+- 📚 Browse the documentation above
+- 🐛 [Report an issue](https://github.com/wwarobert/ComplianceX/issues/new)
+- 💬 [Start a discussion](https://github.com/wwarobert/ComplianceX/discussions)
+- 📧 Contact: [Maintainer info]
+
+---
+
+**Documentation Version**: 1.0  
+**Last Updated**: January 8, 2026
+
 
 See [Branching Strategy](development/branching-strategy.md) for the contribution workflow.
 
