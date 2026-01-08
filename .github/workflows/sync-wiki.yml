@@ -1,5 +1,12 @@
 # Sync documentation to GitHub Wiki
 # This workflow automatically syncs docs/ folder to the GitHub Wiki
+#
+# Setup Required:
+# 1. Create a Personal Access Token (PAT) with 'repo' scope
+# 2. Add it as a repository secret named 'WIKI_TOKEN'
+# 3. Go to Settings > Secrets and variables > Actions > New repository secret
+#
+# Alternative: Use manual wiki sync or disable this workflow if wiki access is restricted
 
 name: Sync Wiki
 
@@ -15,16 +22,27 @@ on:
 jobs:
   sync-wiki:
     runs-on: ubuntu-latest
+    # Only run if WIKI_TOKEN secret is configured
+    if: github.event_name == 'workflow_dispatch' || vars.ENABLE_WIKI_SYNC == 'true'
     steps:
       - name: Checkout repository
         uses: actions/checkout@v4
+
+      - name: Check for wiki token
+        id: check_token
+        run: |
+          if [ -z "${{ secrets.WIKI_TOKEN }}" ]; then
+            echo "⚠️ WIKI_TOKEN secret not configured"
+            echo "See workflow comments for setup instructions"
+            exit 1
+          fi
 
       - name: Checkout wiki
         uses: actions/checkout@v4
         with:
           repository: ${{ github.repository }}.wiki
           path: wiki
-          token: ${{ secrets.GITHUB_TOKEN }}
+          token: ${{ secrets.WIKI_TOKEN }}
 
       - name: Sync documentation to wiki
         run: |
