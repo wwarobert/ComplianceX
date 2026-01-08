@@ -2,6 +2,17 @@
 
 A comprehensive compliance extension for Azure DevOps that helps organizations maintain and enforce compliance standards across their projects.
 
+## 📖 Documentation
+
+Comprehensive documentation is available in multiple locations:
+
+- **[Documentation Hub](docs/README.md)** - Complete documentation index
+- **[GitHub Wiki](../../wiki)** - Automatically synced wiki pages
+- **[Setup Guide](docs/setup/README.md)** - Get started with ComplianceX
+- **[Development Guidelines](docs/development/branching-strategy.md)** - Contribution workflow
+- **[Plugin Development](docs/plugins/development-guide.md)** - Create custom rules
+- **[GitHub Copilot Instructions](.github/copilot-instructions.md)** - AI-assisted development
+
 ## Project Structure
 
 ```
