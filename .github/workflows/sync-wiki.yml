@@ -14,9 +14,11 @@ on:
   push:
     branches:
       - main
+      - feature/004-fix-wiki-sync-bash-error  # TEMP: Remove before merging
     paths:
       - 'docs/**'
       - '.github/copilot-instructions.md'
+      - '.github/workflows/sync-wiki.yml'  # Also trigger on workflow changes
   workflow_dispatch:
 
 jobs:
@@ -52,60 +54,60 @@ jobs:
           # Copy all documentation files (maintains structure)
           cp -r docs/* wiki/
           
-          # Create wiki Home page with clean navigation
-          cat > wiki/Home.md << 'EOF'
-          # ComplianceX Documentation
+          # Store repository URL in variable to avoid bash interpolation issues
+          REPO_URL="https://github.com/${{ github.repository }}"
+          
+          # Create wiki Home page - use cat with plain text, then echo for content
+          cat > wiki/Home.md <<'DOCEND'
+# ComplianceX Documentation
 
-          Welcome to ComplianceX! This wiki is automatically synced from the [docs/](https://github.com/${{ github.repository }}/tree/main/docs) folder.
+Welcome to ComplianceX! This wiki is automatically synced from the docs/ folder.
 
-          ## 🚀 Quick Start
+## 🚀 Quick Start
 
-          - **[Getting Started](Getting-Started.md)** - New to ComplianceX? Start here
-          - **[Installation](setup/Installation.md)** - Install and configure
-          - **[Your First Rule](plugins/Your-First-Rule.md)** - Create your first compliance rule
+- **[Getting Started](Getting-Started.md)** - New to ComplianceX? Start here
+- **[Installation](setup/Installation.md)** - Install and configure
+- **[Your First Rule](plugins/Your-First-Rule.md)** - Create your first compliance rule
 
-          ## 📖 Documentation
+## 📖 Documentation
 
-          ### For Users
-          - [Getting Started](Getting-Started.md)
-          - [Installation Guide](setup/Installation.md)
-          - [Configuration](setup/Configuration.md)
-          - [Deployment](setup/Deployment.md)
+### For Users
+- [Getting Started](Getting-Started.md)
+- [Installation Guide](setup/Installation.md)
+- [Configuration](setup/Configuration.md)
+- [Deployment](setup/Deployment.md)
 
-          ### For Developers
-          - [Development Setup](development/Development-Setup.md)
-          - [Architecture Overview](development/Architecture.md)
-          - [API Reference](api/API-Reference.md)
-          - [Contributing Guide](development/Contributing.md)
+### For Developers
+- [Development Setup](development/Development-Setup.md)
+- [Architecture Overview](development/Architecture.md)
+- [API Reference](api/API-Reference.md)
+- [Contributing Guide](development/Contributing.md)
 
-          ### For Plugin Authors
-          - [Plugin Development](plugins/Plugin-Development.md)
-          - [Your First Rule](plugins/Your-First-Rule.md)
-          - [Plugin Examples](plugins/Examples.md)
-          - [Plugin API Reference](plugins/API-Reference.md)
+### For Plugin Authors
+- [Plugin Development](plugins/Plugin-Development.md)
+- [Your First Rule](plugins/Your-First-Rule.md)
+- [Plugin Examples](plugins/Examples.md)
+- [Plugin API Reference](plugins/API-Reference.md)
 
-          ### Guidelines & Standards
-          - [Branching Strategy](development/Branching-Strategy.md)
-          - [Naming Conventions](development/Naming-Conventions.md)
-          - [GitHub Copilot Guide](development/GitHub-Copilot-Guide.md)
-          - [Feature Roadmap](development/Feature-Roadmap.md)
+### Guidelines & Standards
+- [Branching Strategy](development/Branching-Strategy.md)
+- [Naming Conventions](development/Naming-Conventions.md)
+- [GitHub Copilot Guide](development/GitHub-Copilot-Guide.md)
+- [Feature Roadmap](development/Feature-Roadmap.md)
 
-          ## 🔗 Links
+## 🔗 Links
 
-          - [GitHub Repository](https://github.com/${{ github.repository }})
-          - [Issue Tracker](https://github.com/${{ github.repository }}/issues)
-          - [Discussions](https://github.com/${{ github.repository }}/discussions)
+DOCEND
+          # Append links with variable expansion
+          cat >> wiki/Home.md <<EOF
+- [GitHub Repository]($REPO_URL)
+- [Issue Tracker]($REPO_URL/issues)
+- [Discussions]($REPO_URL/discussions)
 
-          ---
+---
 
-          _This wiki is automatically updated when docs/ changes in the main branch._
-          EOF
-          - [Marketplace Deployment](setup/marketplace-deployment.md)
-
-          ---
-
-          **Note**: This wiki is automatically synced from the [docs/](https://github.com/${{ github.repository }}/tree/main/docs) folder in the repository.
-          EOF
+_This wiki is automatically updated when docs/ changes in the main branch._
+EOF
 
       - name: Commit and push to wiki
         working-directory: wiki
